@@ -4,7 +4,6 @@
 #include "interpreter.h"
 
 void setUp(void){}
-
 void tearDown(void){}
 
 void test_op_MOVLW_move_10101011_to_WREG(void)
@@ -90,6 +89,41 @@ void test_op_XORLW_exclusive_OR_0xDD_to_WREG_and_put_back_to_WREG(void)
     WREG = 0x10;
     TEST_ASSERT_EQUAL(WREG, op_XORLW(0xDD));
 }
+
+void test_op_CLRF_clear_data_in_0x10_file_register(void)
+{
+    REG0[0x10] = 0x20;
+    TEST_ASSERT_EQUAL(REG0[0x10], op_CLRF(0x010)); //the MSB 0 indicate default bank 
+}
+
+void test_op_CLRF_clear_data_in_bank_6_0x10_file_register_should_return_0(void)
+{
+    BSR = 0x06;
+    REG4[0x10] = 0x20;
+    TEST_ASSERT_EQUAL(0, op_CLRF(0x110)); //the MSB 1 indicate ACCESS bank
+}
+
+void test_op_CLRF_clear_data_in_bank_3_0x10_file_register(void)
+{
+    BSR = 0x03;
+    REG3[0x10] = 0x20;
+    TEST_ASSERT_EQUAL(REG3[0x10], op_CLRF(0x110)); //the MSB 1 indicate ACCESS bank 
+}
+
+void test_op_SETF_set_data_0x10_file_register(void)
+{
+    REG0[0x10] = 0x20;
+    TEST_ASSERT_EQUAL(REG0[0x10], op_SETF(0x010)); //the MSB 0 indicate default bank 
+}
+
+void test_op_SETF_set_data_in_bank_4_0x10_file_register(void)
+{
+    BSR = 0x04;
+    REG4[0x10] = 0x20;
+    TEST_ASSERT_EQUAL(REG4[0x10], op_SETF(0x110)); //the MSB 1 indicate ACCESS bank 
+}
+
+
 
 
 

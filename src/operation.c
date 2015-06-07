@@ -20,19 +20,19 @@ int op_MOVLB(int flash_Mem)
 //Move WREG to file register
 int op_MOVWF(int flash_Mem)
 {
-    int temp = 0b0000000100000000;
     int loc = flash_Mem & MSB_8bits;
+    int temp = 0b0000000100000000;
     int a = flash_Mem & temp;
     
     if(a == 0b0000000100000000)
     {
         switch(BSR)
         {
-            case 1 : REG1[loc] = WREG; return REG1[loc] = WREG; break;
-            case 2 : REG2[loc] = WREG; return REG2[loc] = WREG; break;
-            case 3 : REG3[loc] = WREG; return REG3[loc] = WREG; break;
-            case 4 : REG4[loc] = WREG; return REG4[loc] = WREG; break;
-            case 5 : REG5[loc] = WREG; return REG5[loc] = WREG; break;
+            case 1 : REG1[loc] = WREG; return REG1[loc]; break;
+            case 2 : REG2[loc] = WREG; return REG2[loc]; break;
+            case 3 : REG3[loc] = WREG; return REG3[loc]; break;
+            case 4 : REG4[loc] = WREG; return REG4[loc]; break;
+            case 5 : REG5[loc] = WREG; return REG5[loc]; break;
             default : return 0; break;
         }
     }
@@ -81,6 +81,57 @@ int op_XORLW(int flash_Mem)
     flash_Mem &= MSB_8bits;
     WREG = ~(WREG | flash_Mem);
     return WREG;
+}
+
+//Clear file register
+int op_CLRF(int flash_Mem)
+{
+    int loc = flash_Mem & MSB_8bits;
+    int temp = 0b0000000100000000;
+    int a = flash_Mem & temp;
+    
+    if(a == 0b0000000100000000)
+    {
+        switch(BSR)
+        {
+            case 1 : REG1[loc] = 0; return REG1[loc]; break;
+            case 2 : REG2[loc] = 0; return REG2[loc]; break;
+            case 3 : REG3[loc] = 0; return REG3[loc]; break;
+            case 4 : REG4[loc] = 0; return REG4[loc]; break;
+            case 5 : REG5[loc] = 0; return REG5[loc]; break;
+            default : return 0; break;
+        }
+    }
+    else
+    {
+        REG0[loc] = 0;
+        return REG0[loc];
+    }
+}
+
+int op_SETF(int flash_Mem)
+{
+    int loc = flash_Mem & MSB_8bits;
+    int temp = 0b0000000100000000;
+    int a = flash_Mem & temp;
+    
+    if(a == 0b0000000100000000)
+    {
+        switch(BSR)
+        {
+            case 1 : REG1[loc] = 0xFF; return REG1[loc]; break;
+            case 2 : REG2[loc] = 0xFF; return REG2[loc]; break;
+            case 3 : REG3[loc] = 0xFF; return REG3[loc]; break;
+            case 4 : REG4[loc] = 0xFF; return REG4[loc]; break;
+            case 5 : REG5[loc] = 0xFF; return REG5[loc]; break;
+            default : return 0; break;
+        }
+    }
+    else
+    {
+        REG0[loc] = 0xFF;
+        return REG0[loc];
+    }
 }
 
 //No operation
