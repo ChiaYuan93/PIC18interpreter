@@ -5,26 +5,24 @@
 //Move literal to WREG
 int op_MOVLW(int flash_Mem)
 {
-    int temp = 0b0000000011111111;
-    WREG = flash_Mem & temp;
+    WREG = flash_Mem & MSB_8bits;
     return WREG;
 }
 
 //Move literal to BSR<3:0>
 int op_MOVLB(int flash_Mem)
 {
-    int temp = 0b0000000000001111;
-    BSR = flash_Mem & temp;
+    int MSB_12bits = 0b0000000000001111;
+    BSR = flash_Mem & MSB_12bits;
     return BSR;
 }
 
 //Move WREG to file register
 int op_MOVWF(int flash_Mem)
 {
-    int temp0 = 0b0000000011111111;
-    int temp1 = 0b0000000100000000;
-    int loc = flash_Mem & temp0;
-    int a = flash_Mem & temp1;
+    int temp = 0b0000000100000000;
+    int loc = flash_Mem & MSB_8bits;
+    int a = flash_Mem & temp;
     
     if(a == 0b0000000100000000)
     {
@@ -43,6 +41,46 @@ int op_MOVWF(int flash_Mem)
         REG0[loc] = WREG;
         return REG0[loc];
     }
+}
+
+//Add literal and WREG
+int op_ADDLW(int flash_Mem)
+{
+    flash_Mem &= MSB_8bits;
+    WREG += flash_Mem;
+    return WREG;
+}
+
+//AND literal with WREG
+int op_ANDLW(int flash_Mem)
+{
+    flash_Mem &= MSB_8bits;
+    WREG &= flash_Mem;
+    return WREG;
+}
+
+//Inclusive OR literal with WREG
+int op_IORLW(int flash_Mem)
+{
+    flash_Mem &= MSB_8bits;
+    WREG |= flash_Mem;
+    return WREG;
+}
+
+//Multiply literal with WREG
+int op_MULLW(int flash_Mem)
+{
+    flash_Mem &= MSB_8bits;
+    WREG *= flash_Mem;
+    return WREG;
+}
+
+//Exclusive OR literal with WREG
+int op_XORLW(int flash_Mem)
+{
+    flash_Mem &= MSB_8bits;
+    WREG = ~(WREG | flash_Mem);
+    return WREG;
 }
 
 //No operation
