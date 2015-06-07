@@ -48,7 +48,6 @@ void test_move_0x11_to_0x10_file_register_in_bank_5(void)
     op_MOVLB(0b0000000100000101);
     op_MOVLW(0b0000111000010001);
     TEST_ASSERT_EQUAL(WREG, op_MOVWF(0b0110111100010000));
-    printf("%#x\n", REG5[0x10]);
 }
 
 void test_op_NOP_should_return_0(void)

@@ -35,7 +35,7 @@ int op_MOVWF(int flash_Mem)
             case 3 : REG3[loc] = WREG; return REG3[loc] = WREG; break;
             case 4 : REG4[loc] = WREG; return REG4[loc] = WREG; break;
             case 5 : REG5[loc] = WREG; return REG5[loc] = WREG; break;
-            default : printf("There is only bank 0 to 5\n"); break;
+            default : return 0; break;
         }
     }
     else
