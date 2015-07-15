@@ -18,7 +18,11 @@ void test_execute_addwf_should_stored_result_in_WREG(){
 
 
 
-  UnityAssertEqualNumber((_U_SINT)((0X18)), (_U_SINT)((ramMemory[0xfe8])), (((void *)0)), (_U_UINT)12, UNITY_DISPLAY_STYLE_INT);
+  uint32_t addwf(uint16_t instruction);
+
+
+
+  UnityAssertEqualNumber((_U_SINT)((0X18)), (_U_SINT)((ramMemory[0xfe8])), (((void *)0)), (_U_UINT)14, UNITY_DISPLAY_STYLE_INT);
 
 }
 
@@ -32,6 +36,10 @@ void test_execute_addwf_should_stored_result_in_file_register(){
 
 
 
-  UnityAssertEqualNumber((_U_SINT)((0X20)), (_U_SINT)((ramMemory[0x01])), (((void *)0)), (_U_UINT)19, UNITY_DISPLAY_STYLE_INT);
+  uint32_t addwf(uint16_t instruction);
+
+
+
+  UnityAssertEqualNumber((_U_SINT)((0X20)), (_U_SINT)((ramMemory[0x01])), (((void *)0)), (_U_UINT)23, UNITY_DISPLAY_STYLE_INT);
 
 }

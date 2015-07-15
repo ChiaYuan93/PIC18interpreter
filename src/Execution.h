@@ -9,9 +9,10 @@
 
 
 typedef struct{
-  uint32_t(*execute)(uint16_t instruction);
+  uint32_t(*executionTable)(uint16_t instruction);
 } ExecutionEntry;
 
 char ramMemory[0x1000];
+uint32_t addwf(uint16_t instruction);
 
 #endif // Execution_H

@@ -5,10 +5,10 @@
 :successes: []
 :failures:
 - :test: test_execute_addwf_should_stored_result_in_WREG
-  :line: 12
+  :line: 14
   :message: Expected 24 Was 23
 - :test: test_execute_addwf_should_stored_result_in_file_register
-  :line: 19
+  :line: 23
   :message: Expected 32 Was 1
 :ignores: []
 :counts:

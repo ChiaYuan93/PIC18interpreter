@@ -48,7 +48,7 @@ int main(void)
 {
   UnityBegin("test_Execution.c");
   RUN_TEST(test_execute_addwf_should_stored_result_in_WREG, 8);
-  RUN_TEST(test_execute_addwf_should_stored_result_in_file_register, 15);
+  RUN_TEST(test_execute_addwf_should_stored_result_in_file_register, 17);
 
   return (UnityEnd());
 }
